@@ -1,13 +1,15 @@
 {
-  "name": "vite-project",
-  "private": true,
-  "version": "0.0.0",
+  "name": "chess-moves",
+  "private": false,
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/chess.js": "^0.13.1",
+    "@types/node": "^17.0.42",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "eslint": "^8.17.0",
@@ -20,8 +22,6 @@
     "vitest": "^0.14.2"
   },
   "dependencies": {
-    "@types/chess.js": "^0.13.1",
-    "@types/node": "^17.0.42",
     "chess.js": "^0.13.2",
     "chessground": "^8.2.1"
   }

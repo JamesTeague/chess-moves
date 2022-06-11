@@ -17,12 +17,12 @@ specifiers:
   vitest: ^0.14.2
 
 dependencies:
-  '@types/chess.js': 0.13.1
-  '@types/node': 17.0.42
   chess.js: 0.13.2
   chessground: 8.2.1
 
 devDependencies:
+  '@types/chess.js': 0.13.1
+  '@types/node': 17.0.42
   '@typescript-eslint/eslint-plugin': 5.27.1_aq7uryhocdbvbqum33pitcm3y4
   '@typescript-eslint/parser': 5.27.1_ud6rd4xtew5bv4yhvkvu24pzm4
   eslint: 8.17.0
@@ -183,7 +183,7 @@ packages:
 
   /@types/chess.js/0.13.1:
     resolution: {integrity: sha512-g5+1ClE0exhD+U7LCcclzBons3d/7ensY61pIoPIdh1VGWMrfMjW0RlI3AYZOXjvc+9Y4KM6lfDiBhXhb7FZag==}
-    dev: false
+    dev: true
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
@@ -195,7 +195,7 @@ packages:
 
   /@types/node/17.0.42:
     resolution: {integrity: sha512-Q5BPGyGKcvQgAMbsr7qEGN/kIPN6zZecYYABeTDBizOsau+2NMdSVTar9UQw21A2+JyA2KRNDYaYrPB0Rpk2oQ==}
-    dev: false
+    dev: true
 
   /@typescript-eslint/eslint-plugin/5.27.1_aq7uryhocdbvbqum33pitcm3y4:
     resolution: {integrity: sha512-6dM5NKT57ZduNnJfpY81Phe9nc9wolnMCnknb1im6brWi1RYv84nbMS3olJa27B6+irUVV1X/Wb+Am0FjJdGFw==}
