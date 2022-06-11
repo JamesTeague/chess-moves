@@ -1,9 +1,9 @@
-import type { ChessGame, GameDelta, Promotion } from '@/chessGame';
+import type { ChessGame, GameDelta, Promotion } from './chessGame';
 import type { DrawShape } from 'chessground/draw';
 import type { Key } from 'chessground/types';
 import { Chess, type ChessInstance, type Square } from 'chess.js';
 import { parse, type PgnMove } from '@mliebelt/pgn-parser';
-import { createDelta, possibleMovesToDests, toColor } from '@/utils';
+import { createDelta, possibleMovesToDests, toColor } from './utils';
 
 interface ChessStudy extends ChessGame {
   showHints(): DrawShape[];

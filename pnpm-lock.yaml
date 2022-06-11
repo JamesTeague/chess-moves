@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@mliebelt/pgn-parser': ^1.4.4
   '@types/chess.js': ^0.13.1
   '@types/node': ^17.0.42
   '@typescript-eslint/eslint-plugin': ^5.27.1
@@ -17,6 +18,7 @@ specifiers:
   vitest: ^0.14.2
 
 dependencies:
+  '@mliebelt/pgn-parser': 1.4.4
   chess.js: 0.13.2
   chessground: 8.2.1
 
@@ -106,6 +108,11 @@ packages:
   /@microsoft/tsdoc/0.14.1:
     resolution: {integrity: sha512-6Wci+Tp3CgPt/B9B0a3J4s3yMgLNSku6w5TV6mN+61C71UqsRBv2FUibBf3tPGlNxebgPHMEUzKpb1ggE8KCKw==}
     dev: true
+
+  /@mliebelt/pgn-parser/1.4.4:
+    resolution: {integrity: sha512-8P2FeXlq5YWV3QwRHPoGGx8YVT1HEtZ4MtH67UCYa8I9MkVzj+u2Suhf8Qv1l4oZ7W6+XOGvwXZqV1dqkLLjPA==}
+    hasBin: true
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
