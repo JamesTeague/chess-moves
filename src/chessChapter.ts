@@ -9,6 +9,7 @@ export interface ChessChapter extends ChessGame {
   showHints(): DrawShape[];
   playUserMove(origin: Key, destination: Key, promotion?: Promotion): GameDelta;
   playAiMove(): GameDelta;
+  isEndOfLine(): boolean;
 }
 
 type Line = {
@@ -63,9 +64,9 @@ const generateNodes = (game: PgnMove[]) => {
 };
 
 const showHints =
-  (chess: ChessInstance, lines: Line[], currentMove: number[]) => () => {
+  (chess: ChessInstance, currentMove: number[], possibleMovesFn: (currentMove: number[]) => string[]) => () => {
     const drawShapes: DrawShape[] = [];
-    const moves = getPossibleMoves(lines)(currentMove);
+    const moves = possibleMovesFn(currentMove);
 
     const chessCopy = new Chess(chess.fen());
 
@@ -101,11 +102,11 @@ const getPossibleMoves = (lines: Line[]) => (currentMove: number[]) => {
 };
 
 const playAiMove =
-  (chess: ChessInstance, lines: Line[], currentMove: number[]) => () => {
+  (chess: ChessInstance, currentMove: number[], possibleMovesFn: (currentMove: number[]) => string[]) => () => {
     const randomIndex = ~~(
-      Math.random() * getPossibleMoves(lines)(currentMove).length
+      Math.random() * possibleMovesFn(currentMove).length
     );
-    const move = getPossibleMoves(lines)(currentMove)[randomIndex];
+    const move = possibleMovesFn(currentMove)[randomIndex];
 
     currentMove.push(randomIndex);
 
@@ -115,7 +116,7 @@ const playAiMove =
   };
 
 const playUserMove =
-  (chess: ChessInstance, lines: Line[], currentMove: number[]) =>
+  (chess: ChessInstance, currentMove: number[], possibleMovesFn: (currentMove: number[]) => string[]) =>
   (origin: Key, destination: Key, promotion?: Promotion) => {
     const move = chess.move({
       from: <Square>origin,
@@ -123,8 +124,8 @@ const playUserMove =
       promotion,
     });
 
-    if (move && getPossibleMoves(lines)(currentMove).includes(move.san)) {
-      const indexOfMove = getPossibleMoves(lines)(currentMove).findIndex(
+    if (move && possibleMovesFn(currentMove).includes(move.san)) {
+      const indexOfMove = possibleMovesFn(currentMove).findIndex(
         (possibleMove) => possibleMove === move.san,
       );
       currentMove.push(indexOfMove);
@@ -144,13 +145,15 @@ export const createChessChapter = (
 ): ChessChapter => {
   const currentMove: number[] = [];
   const lines = generateNodes(moves)
+  const possibleMovesFn = getPossibleMoves(lines)
 
   return {
-    showHints: showHints(chess, lines, currentMove),
-    playUserMove: playUserMove(chess, lines, currentMove),
-    playAiMove: playAiMove(chess, lines, currentMove),
+    showHints: showHints(chess, currentMove, possibleMovesFn),
+    playUserMove: playUserMove(chess, currentMove, possibleMovesFn),
+    playAiMove: playAiMove(chess, currentMove, possibleMovesFn),
     turnColor: turnColor(chess),
     getDests: getDests(chess),
     isPromotion: () => false,
+    isEndOfLine: () => possibleMovesFn(currentMove).length === 0,
   };
 };

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Chess, Square } from 'chess.js';
 import { possibleMovesToDests } from '../utils';
-import { pgnTest } from './pgn';
+import { pgnTest, shortPgn } from './pgn';
 import { createChessStudy } from '../chessStudy';
 
 describe('ChessStudy', () => {
@@ -49,5 +49,12 @@ describe('ChessStudy', () => {
     }]
 
     expect(hints).toEqual(expectedHints)
+  });
+
+  it('denotes end of line', () => {
+    const chapter = createChessStudy(shortPgn).selectChapter(0)!;
+    [...Array(10).keys()].forEach(() => chapter.playAiMove())
+
+    expect(chapter.isEndOfLine()).toBe(true);
   })
 })

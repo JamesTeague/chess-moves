@@ -1005,3 +1005,15 @@ export const pgnTest = '[Event "g6 repetoire: Modern Defense - Anti-Fianchetto (
   '(2610)-Kasparov,G (2780) Linares 1992 } *\n' +
   '\n' +
   '\n'
+
+export const shortPgn = '[Event "Caro Kann: Exchange Variation Trap1 - Black Wins"]\n' +
+  '[Site "https://lichess.org/study/NycXEl0j/jk5baMGD"]\n' +
+  '[Result "*"]\n' +
+  '[UTCDate "2022.06.06"]\n' +
+  '[UTCTime "10:09:44"]\n' +
+  '[Variant "Standard"]\n' +
+  '[ECO "B13"]\n' +
+  '[Opening "Caro-Kann Defense: Exchange Variation"]\n' +
+  '[Annotator "https://lichess.org/@/utkal_s"]\n' +
+  '\n' +
+  '1. e4 c6 2. d4 d5 3. exd5 cxd5 4. h3 Nc6 5. Bd3 { [%cal Gf1d3] } 5... Nxd4 *'
