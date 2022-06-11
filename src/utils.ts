@@ -30,5 +30,11 @@ export const createDelta = (chess: ChessInstance): GameDelta => {
     isCheck: chess.in_check(),
     dests: possibleMovesToDests(chess),
     lastMove: history[history.length - 1],
+    isInsufficientMaterial: chess.insufficient_material(),
+    isCheckmate: chess.in_checkmate(),
+    isDraw: chess.in_draw(),
+    isGameOver: chess.game_over(),
+    isStalemate: chess.in_stalemate(),
+    isThreefoldRepetition: chess.in_threefold_repetition(),
   }
 };

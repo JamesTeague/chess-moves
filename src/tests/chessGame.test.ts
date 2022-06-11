@@ -26,12 +26,12 @@ describe('ChessGame', () => {
     const delta = chessGame.playUserMove('d2', 'd4');
     const lastMove = chess.move({ from: 'd2', to: 'd4'})
 
-    expect(delta).toEqual({
+    expect(delta).toMatchObject({
       fen: chess.fen(),
       turnColor: 'black',
       isCheck: false,
       dests: possibleMovesToDests(chess),
-      lastMove,
+      lastMove
     });
   });
 
@@ -78,7 +78,7 @@ describe('ChessGame', () => {
 
     const delta = chessGame.playUserMove('c1', 'c4');
 
-    expect(delta).toEqual({
+    expect(delta).toMatchObject({
       fen: chess.fen(),
       turnColor: 'white',
       isCheck: false,

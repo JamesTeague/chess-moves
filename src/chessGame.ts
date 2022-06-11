@@ -8,6 +8,12 @@ export type GameDelta = {
   isCheck: boolean;
   dests: Dests;
   lastMove: Move;
+  isGameOver: boolean;
+  isStalemate: boolean;
+  isCheckmate: boolean;
+  isDraw: boolean;
+  isThreefoldRepetition: boolean;
+  isInsufficientMaterial: boolean;
 };
 
 export type Promotion = 'q' | 'b' | 'n' | 'r' | undefined;
