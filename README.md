@@ -19,5 +19,11 @@ npm install chess-moves
 ```js
 import { createChessGame } from 'chess-moves';
 
-const chessGame = createChessGame(ne)
+const chessGame = createChessGame();
+
+// AI Plays white
+let delta = chessGame.playAiMove();
+
+// User Plays Black
+delta = chessGame.playUserMove({ from: 'e7', to: 'e5' });
 ```
