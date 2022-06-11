@@ -1,5 +1,5 @@
 import { type ChessInstance, SQUARES } from 'chess.js';
-import type { Dests, Key } from 'chessground/types';
+import type { Dests } from 'chessground/types';
 import type { GameDelta } from './chessGame';
 
 export const possibleMovesToDests = (game: ChessInstance): Dests => {
@@ -16,21 +16,6 @@ export const possibleMovesToDests = (game: ChessInstance): Dests => {
   });
 
   return dests;
-};
-
-export const possiblePromotions = (game: ChessInstance) =>
-  game.moves({ verbose: true }).filter(({ promotion }) => !!promotion);
-
-export const isPromotion = (
-  game: ChessInstance,
-  origin: Key,
-  destination: Key,
-): boolean => {
-  const promotion = possiblePromotions(game).find(
-    ({ to, from }) => from == origin && to == destination,
-  );
-
-  return !!promotion;
 };
 
 export const toColor = (game: ChessInstance) =>
