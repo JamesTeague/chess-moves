@@ -1,32 +1,30 @@
-import { beforeEach, describe, it, expect } from 'vitest';
-import { Chess, type ChessInstance } from 'chess.js';
+import { describe, it, expect } from 'vitest';
+import { Chess, Square } from 'chess.js';
 import { possibleMovesToDests } from '../utils';
 import { pgnTest } from './pgn';
-import { ChessStudy, createChessStudy } from '../chessStudy';
+import { createChessStudy } from '../chessStudy';
 
 describe('ChessStudy', () => {
-  let chess: ChessInstance;
-  let chessStudy: ChessStudy;
-
-  beforeEach(() => {
-    chess = new Chess();
-    chessStudy = createChessStudy(pgnTest, chess);
-  });
 
   it('gives all valid moves from a starting position', () => {
-    const dests = chessStudy.selectChapter(11)!.getDests();
+    const chess = new Chess();
+    const dests = createChessStudy(pgnTest).selectChapter(11)!.getDests();
 
     expect(dests).toEqual(possibleMovesToDests(chess));
   });
 
   it('only allows moves from the pgn', () => {
-    const chapter = chessStudy.selectChapter(11)!
+    const chapter = createChessStudy(pgnTest).selectChapter(11)!
+    const localChess = new Chess()
+
     const firstMoveDelta = chapter.playAiMove();
+    localChess.move(firstMoveDelta.lastMove.san)
 
 
     expect(['c4', 'd4', 'g3', 'b4', 'Nf3', 'f4', 'b3', 'Nc3'])
-      .toContain(chess.history()[0]);
+      .toContain(firstMoveDelta.lastMove.san);
 
+    // Invalid Move
     let delta = chapter.playUserMove('d7', 'd5');
 
     expect(firstMoveDelta.fen).toEqual(delta.fen);
@@ -34,13 +32,14 @@ describe('ChessStudy', () => {
     // Round about way of getting a valid move
     const hints = chapter.showHints();
     delta = chapter.playUserMove(hints[0].orig, hints[0].dest!)
+    localChess.move({ to: hints[0].dest as Square, from: hints[0].orig as Square})
 
     expect(delta.fen).not.toEqual(firstMoveDelta.fen);
-    expect(delta.fen).toEqual(chess.fen())
+    expect(delta.fen).toEqual(localChess.fen())
   });
 
   it('shows hints', () => {
-    const chapter = chessStudy.selectChapter(0)!
+    const chapter = createChessStudy(pgnTest).selectChapter(0)!
 
     const hints = chapter.showHints();
     const expectedHints = [{

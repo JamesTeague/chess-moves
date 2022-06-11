@@ -996,7 +996,7 @@ export const pgnTest = '[Event "g6 repetoire: Modern Defense - Anti-Fianchetto (
   'annoying you plan to play g6. Instead let\'s develop fast and take over the\n' +
   'center } 1... e5 2. Bb2 Bxb4!? 3. Bxe5 Nf6 4. Nf3 O-O 5. e3 d5 6. Be2 c5 7. O-O Nc6 8. Bb2 Ba5)  (1. Nc3 g6 2. h4!? { This is very wacky and original and suceeds\n' +
   'in taking the game into totally weird positions. Probably best is to strike\n' +
-  'back in the center after } 2... d5 3. d4 Nf6)  (1. e3) 1... g6 2. Nc3 Bg7 3. g3 { If White\n' +
+  'back in the center after } 2... d5 3. d4 Nf6) 1... g6 2. Nc3 Bg7 3. g3 { If White\n' +
   'doesn\'t play something like e4 or d4 then this is the most English like way to\n' +
   'setup } 3... e5!? { The early e5 is our motto in the Hyper-Accelerated lines so\n' +
   'let\'s try it here. After all this is what Kasparov did! } (3... e6 { If you\n' +

@@ -1,15 +1,13 @@
-import { ChessChapter, createChessChapter } from './chessChapter';
-import { ChessInstance } from 'chess.js';
+import { Chess } from 'chess.js';
 import { parse, ParseTree } from '@mliebelt/pgn-parser';
+import { ChessChapter, createChessChapter } from './chessChapter';
 
 export interface ChessStudy {
   selectChapter(index: number): ChessChapter | null;
 }
 
-export const createChessStudy = (
-  pgn: string,
-  chess: ChessInstance,
-): ChessStudy => {
+export const createChessStudy = (pgn: string): ChessStudy => {
+  const chess = new Chess();
   const chapters = new Map<number, ChessChapter>()
   const parsedPgn = <ParseTree[]>parse(pgn, { startRule: 'games' });
 

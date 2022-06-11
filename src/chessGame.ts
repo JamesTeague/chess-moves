@@ -1,5 +1,5 @@
 import type { Dests, Key } from 'chessground/types';
-import type { ChessInstance, Square } from 'chess.js';
+import { Chess, type ChessInstance, type Move, type Square } from 'chess.js';
 import { createDelta, possibleMovesToDests, toColor } from './utils';
 
 export type GameDelta = {
@@ -7,6 +7,7 @@ export type GameDelta = {
   turnColor: 'white' | 'black';
   isCheck: boolean;
   dests: Dests;
+  lastMove: Move;
 };
 
 export type Promotion = 'q' | 'b' | 'n' | 'r' | undefined;
@@ -19,13 +20,17 @@ export interface ChessGame {
   turnColor(): 'white' | 'black';
 }
 
-export const createChessGame = (chess: ChessInstance): ChessGame => ({
-  getDests: getDests(chess),
-  isPromotion: isPromotion(chess),
-  playUserMove: playUserMove(chess),
-  playAiMove: playAiMove(chess),
-  turnColor: turnColor(chess),
-});
+export const createChessGame = (fen?: string): ChessGame => {
+  const chess = new Chess(fen);
+
+  return {
+    getDests: getDests(chess),
+      isPromotion: isPromotion(chess),
+    playUserMove: playUserMove(chess),
+    playAiMove: playAiMove(chess),
+    turnColor: turnColor(chess),
+  }
+};
 
 const getDests = (game: ChessInstance) => () => possibleMovesToDests(game);
 

@@ -21,9 +21,14 @@ export const possibleMovesToDests = (game: ChessInstance): Dests => {
 export const toColor = (game: ChessInstance) =>
   game.turn() === 'w' ? 'white' : 'black';
 
-export const createDelta = (chess: ChessInstance): GameDelta => ({
-  fen: chess.fen(),
-  turnColor: toColor(chess),
-  isCheck: chess.in_check(),
-  dests: possibleMovesToDests(chess),
-});
+export const createDelta = (chess: ChessInstance): GameDelta => {
+  const history = chess.history({ verbose: true });
+
+  return {
+    fen: chess.fen(),
+    turnColor: toColor(chess),
+    isCheck: chess.in_check(),
+    dests: possibleMovesToDests(chess),
+    lastMove: history[history.length - 1],
+  }
+};
