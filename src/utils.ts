@@ -1,5 +1,5 @@
 import { type ChessInstance, SQUARES } from 'chess.js';
-import type { Dests, Key } from 'chessground/types';
+import type { Dests } from 'chessground/types';
 import type { GameDelta } from './chessGame';
 
 export const possibleMovesToDests = (game: ChessInstance): Dests => {
@@ -18,27 +18,23 @@ export const possibleMovesToDests = (game: ChessInstance): Dests => {
   return dests;
 };
 
-export const possiblePromotions = (game: ChessInstance) =>
-  game.moves({ verbose: true }).filter(({ promotion }) => !!promotion);
-
-export const isPromotion = (
-  game: ChessInstance,
-  origin: Key,
-  destination: Key,
-): boolean => {
-  const promotion = possiblePromotions(game).find(
-    ({ to, from }) => from == origin && to == destination,
-  );
-
-  return !!promotion;
-};
-
 export const toColor = (game: ChessInstance) =>
   game.turn() === 'w' ? 'white' : 'black';
 
-export const createDelta = (chess: ChessInstance): GameDelta => ({
-  fen: chess.fen(),
-  turnColor: toColor(chess),
-  isCheck: chess.in_check(),
-  dests: possibleMovesToDests(chess),
-});
+export const createDelta = (chess: ChessInstance): GameDelta => {
+  const history = chess.history({ verbose: true });
+
+  return {
+    fen: chess.fen(),
+    turnColor: toColor(chess),
+    isCheck: chess.in_check(),
+    dests: possibleMovesToDests(chess),
+    lastMove: history[history.length - 1],
+    isInsufficientMaterial: chess.insufficient_material(),
+    isCheckmate: chess.in_checkmate(),
+    isDraw: chess.in_draw(),
+    isGameOver: chess.game_over(),
+    isStalemate: chess.in_stalemate(),
+    isThreefoldRepetition: chess.in_threefold_repetition(),
+  };
+};

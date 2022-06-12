@@ -1,4 +1,3 @@
-import { fileURLToPath, URL } from 'url';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -26,9 +25,5 @@ export default defineConfig({
       },
     },
   },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
+  resolve: {},
 });

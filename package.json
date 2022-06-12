@@ -1,18 +1,36 @@
 {
   "name": "chess-moves",
   "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
+  "keywords": [
+    "chess"
+  ],
+  "author": "James Teague II <james@teague.dev>",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/chess-moves.umd.js",
+  "module": "./dist/chess-moves.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/chess-moves.es.js",
+      "require": "./dist/chess-moves.umd.js"
+    }
+  },
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/chess.js": "^0.13.1",
     "@types/node": "^17.0.42",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
+    "c8": "^7.11.3",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
