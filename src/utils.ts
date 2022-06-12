@@ -36,5 +36,5 @@ export const createDelta = (chess: ChessInstance): GameDelta => {
     isGameOver: chess.game_over(),
     isStalemate: chess.in_stalemate(),
     isThreefoldRepetition: chess.in_threefold_repetition(),
-  }
+  };
 };

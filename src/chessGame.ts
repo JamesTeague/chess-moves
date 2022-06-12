@@ -24,6 +24,7 @@ export interface ChessGame {
   playUserMove(origin: Key, destination: Key, promotion?: Promotion): GameDelta;
   playAiMove(): GameDelta;
   turnColor(): 'white' | 'black';
+  load(fen: string): GameDelta;
 }
 
 export const createChessGame = (fen?: string): ChessGame => {
@@ -31,11 +32,12 @@ export const createChessGame = (fen?: string): ChessGame => {
 
   return {
     getDests: getDests(chess),
-      isPromotion: isPromotion(chess),
+    isPromotion: isPromotion(chess),
     playUserMove: playUserMove(chess),
     playAiMove: playAiMove(chess),
     turnColor: turnColor(chess),
-  }
+    load: load(chess),
+  };
 };
 
 const getDests = (game: ChessInstance) => () => possibleMovesToDests(game);
@@ -69,6 +71,12 @@ const playAiMove = (chess: ChessInstance) => () => {
   const move = moves[~~Math.random() * moves.length];
 
   chess.move(move);
+
+  return createDelta(chess);
+};
+
+const load = (chess: ChessInstance) => (fen: string) => {
+  chess.load(fen);
 
   return createDelta(chess);
 };

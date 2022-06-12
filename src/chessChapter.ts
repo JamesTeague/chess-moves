@@ -1,8 +1,8 @@
-import type { ChessGame, GameDelta, Promotion } from './chessGame';
 import type { DrawShape } from 'chessground/draw';
 import type { Key } from 'chessground/types';
 import { Chess, type ChessInstance, type Square } from 'chess.js';
 import type { PgnMove } from '@mliebelt/pgn-parser';
+import type { ChessGame, GameDelta, Promotion } from './chessGame';
 import { createDelta, possibleMovesToDests, toColor } from './utils';
 
 export interface ChessChapter extends ChessGame {
@@ -64,7 +64,12 @@ const generateNodes = (game: PgnMove[]) => {
 };
 
 const showHints =
-  (chess: ChessInstance, currentMove: number[], possibleMovesFn: (currentMove: number[]) => string[]) => () => {
+  (
+    chess: ChessInstance,
+    currentMove: number[],
+    possibleMovesFn: (currentMove: number[]) => string[],
+  ) =>
+  () => {
     const drawShapes: DrawShape[] = [];
     const moves = possibleMovesFn(currentMove);
 
@@ -102,10 +107,13 @@ const getPossibleMoves = (lines: Line[]) => (currentMove: number[]) => {
 };
 
 const playAiMove =
-  (chess: ChessInstance, currentMove: number[], possibleMovesFn: (currentMove: number[]) => string[]) => () => {
-    const randomIndex = ~~(
-      Math.random() * possibleMovesFn(currentMove).length
-    );
+  (
+    chess: ChessInstance,
+    currentMove: number[],
+    possibleMovesFn: (currentMove: number[]) => string[],
+  ) =>
+  () => {
+    const randomIndex = ~~(Math.random() * possibleMovesFn(currentMove).length);
     const move = possibleMovesFn(currentMove)[randomIndex];
 
     currentMove.push(randomIndex);
@@ -116,7 +124,11 @@ const playAiMove =
   };
 
 const playUserMove =
-  (chess: ChessInstance, currentMove: number[], possibleMovesFn: (currentMove: number[]) => string[]) =>
+  (
+    chess: ChessInstance,
+    currentMove: number[],
+    possibleMovesFn: (currentMove: number[]) => string[],
+  ) =>
   (origin: Key, destination: Key, promotion?: Promotion) => {
     const move = chess.move({
       from: <Square>origin,
@@ -139,13 +151,19 @@ const playUserMove =
 const turnColor = (chess: ChessInstance) => () => toColor(chess);
 const getDests = (game: ChessInstance) => () => possibleMovesToDests(game);
 
+const load = (chess: ChessInstance) => (fen: string) => {
+  chess.load(fen);
+
+  return createDelta(chess);
+};
+
 export const createChessChapter = (
   chess: ChessInstance,
   moves: PgnMove[],
 ): ChessChapter => {
   const currentMove: number[] = [];
-  const lines = generateNodes(moves)
-  const possibleMovesFn = getPossibleMoves(lines)
+  const lines = generateNodes(moves);
+  const possibleMovesFn = getPossibleMoves(lines);
 
   return {
     showHints: showHints(chess, currentMove, possibleMovesFn),
@@ -155,5 +173,6 @@ export const createChessChapter = (
     getDests: getDests(chess),
     isPromotion: () => false,
     isEndOfLine: () => possibleMovesFn(currentMove).length === 0,
+    load: load(chess),
   };
 };

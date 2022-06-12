@@ -24,14 +24,14 @@ describe('ChessGame', () => {
     const chessGame = createChessGame();
 
     const delta = chessGame.playUserMove('d2', 'd4');
-    const lastMove = chess.move({ from: 'd2', to: 'd4'})
+    const lastMove = chess.move({ from: 'd2', to: 'd4' });
 
     expect(delta).toMatchObject({
       fen: chess.fen(),
       turnColor: 'black',
       isCheck: false,
       dests: possibleMovesToDests(chess),
-      lastMove
+      lastMove,
     });
   });
 
@@ -40,7 +40,7 @@ describe('ChessGame', () => {
     const chessGame = createChessGame();
 
     const delta = chessGame.playAiMove();
-    chess.move(delta.lastMove.san)
+    chess.move(delta.lastMove.san);
 
     expect(delta).toMatchObject({
       fen: chess.fen(),
@@ -59,10 +59,10 @@ describe('ChessGame', () => {
     chess.move(lastMove);
 
     chessGame.playUserMove('c1', 'c4');
-    chess.move({ from: 'c1', to: 'c4'})
+    chess.move({ from: 'c1', to: 'c4' });
 
     const delta = chessGame.playAiMove();
-    chess.move(delta.lastMove)
+    chess.move(delta.lastMove);
 
     expect(delta).toMatchObject({
       fen: chess.fen(),
@@ -89,36 +89,45 @@ describe('ChessGame', () => {
   it('recognizes promotion', () => {
     const chessGame = createChessGame('8/7P/4k3/8/8/3K4/p7/8 w - - 0 1');
 
-    expect(chessGame.isPromotion('h7', 'h8')).toBe(true)
+    expect(chessGame.isPromotion('h7', 'h8')).toBe(true);
   });
 
   it.each([
     {
       promotionFen: '7Q/8/4k3/8/8/3K4/p7/8 b - - 0 1',
       piece: 'q' as Promotion,
-      name: 'Queen'
+      name: 'Queen',
     },
     {
       promotionFen: '7R/8/4k3/8/8/3K4/p7/8 b - - 0 1',
       piece: 'r' as Promotion,
-      name: 'Rook'
+      name: 'Rook',
     },
     {
       promotionFen: '7B/8/4k3/8/8/3K4/p7/8 b - - 0 1',
       piece: 'b' as Promotion,
-      name: 'Bishop'
+      name: 'Bishop',
     },
     {
       promotionFen: '7N/8/4k3/8/8/3K4/p7/8 b - - 0 1',
       piece: 'n' as Promotion,
-      name: 'Knight'
+      name: 'Knight',
     },
-  ])
-  ('allows promotion to %s, name',({ promotionFen, piece }) => {
+  ])('allows promotion to %s, name', ({ promotionFen, piece }) => {
     const chessGame = createChessGame('8/7P/4k3/8/8/3K4/p7/8 w - - 0 1');
 
     const delta = chessGame.playUserMove('h7', 'h8', piece);
 
-    expect(delta.fen).toBe(promotionFen)
+    expect(delta.fen).toBe(promotionFen);
+  });
+
+  it('loads a fen', () => {
+    const chessGame = createChessGame();
+    const delta = chessGame.load('8/7P/4k3/8/8/3K4/p7/8 b - - 0 1');
+
+    expect(delta).toMatchObject({
+      fen: '8/7P/4k3/8/8/3K4/p7/8 b - - 0 1',
+      turnColor: 'black',
+    });
   });
 });
