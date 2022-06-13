@@ -1,2 +1,2 @@
 export * from './chessGame';
-export * from './chessChapter';
+export * from './chessStudy';
