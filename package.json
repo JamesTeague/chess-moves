@@ -1,7 +1,7 @@
 {
   "name": "chess-moves",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -13,6 +13,8 @@
     "chess"
   ],
   "author": "James Teague II <james@teague.dev>",
+  "license": "GPL-3.0-or-later",
+  "repository": "https://github.com/JamesTeague/chess-moves",
   "files": [
     "dist"
   ],
