@@ -1,20 +1,33 @@
 {
   "name": "chess-moves",
   "private": false,
-  "version": "1.0.2",
+  "version": "0.0.0-semantic-release",
+  "author": {
+    "name": "James Teague II",
+    "email": "james@teague.dev"
+  },
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
+    "commit": "git-cz",
+    "dev": "vite",
+    "prepare": "husky install",
     "preview": "vite preview",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
   "keywords": [
-    "chess"
+    "chess",
+    "typescript"
   ],
-  "author": "James Teague II <james@teague.dev>",
   "license": "GPL-3.0-or-later",
-  "repository": "https://github.com/JamesTeague/chess-moves",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesTeague/chess-moves.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesTeague/chess-moves/issues"
+  },
+  "homepage": "https://github.com/JamesTeague/chess-moves#readme",
   "files": [
     "dist"
   ],
@@ -26,17 +39,25 @@
       "require": "./dist/chess-moves.umd.js"
     }
   },
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@commitlint/cz-commitlint": "^17.0.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
     "@types/chess.js": "^0.13.1",
     "@types/node": "^17.0.42",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "c8": "^7.11.3",
+    "commitizen": "^4.2.4",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.1",
     "prettier": "^2.6.2",
+    "semantic-release": "^19.0.3",
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
     "vite-plugin-dts": "^1.2.0",
@@ -46,5 +67,10 @@
     "@mliebelt/pgn-parser": "^1.4.4",
     "chess.js": "^0.13.2",
     "chessground": "^8.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
