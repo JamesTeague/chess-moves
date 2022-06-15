@@ -1,4 +1,4 @@
-# chess-moves &middot; [![Node.js CI](https://github.com/JamesTeague/chess-moves/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/JamesTeague/chess-moves/actions/workflows/node.js.yml) [![Node.js Package](https://github.com/JamesTeague/chess-moves/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/JamesTeague/chess-moves/actions/workflows/npm-publish.yml)
+# chess-moves &middot; ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/JamesTeague/chess-moves/Node.js%20CI) ![npm](https://img.shields.io/npm/v/chess-moves)
 Simple library for making moves using [chess.js](https://github.com/jhlywa/chess.js) with the intention of using the state for showing [Chessground](https://github.com/lichess-org/chessground) board.
 
 ## Why?
