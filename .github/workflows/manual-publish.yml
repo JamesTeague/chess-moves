@@ -18,7 +18,7 @@ jobs:
         uses: pnpm/action-setup@v2.2.2
         with:
           version: 7.1.9
-      - run: pnpm i
+      - run: pnpm i --frozen-lockfile --ignore-scripts
       - run: pnpm test
 
   publish-npm:
@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: pnpm i
+      - run: pnpm i --frozen-lockfile --ignore-scripts
       - run: pnpm run build
       - run: pnpm publish
         env:
