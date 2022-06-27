@@ -1,16 +1,9 @@
-import type { DrawShape } from 'chessground/draw';
 import type { Key } from 'chessground/types';
 import { Chess, type ChessInstance, type Square } from 'chess.js';
 import type { PgnMove } from '@mliebelt/pgn-parser';
-import type { ChessGame, GameDelta, Promotion } from './chessGame';
+import type { Promotion } from './chessGame';
 import { createDelta, possibleMovesToDests, toColor } from './utils';
-
-export interface ChessChapter extends ChessGame {
-  showHints(): DrawShape[];
-  playUserMove(origin: Key, destination: Key, promotion?: Promotion): GameDelta;
-  playAiMove(): GameDelta;
-  isEndOfLine(): boolean;
-}
+import { ChessChapter, DrawShape } from './chessStudy';
 
 type Line = {
   move: string;
