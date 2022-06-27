@@ -1,9 +1,30 @@
 import { Chess } from 'chess.js';
 import { parse, ParseTree } from '@mliebelt/pgn-parser';
-import { ChessChapter, createChessChapter } from './chessChapter';
+import { createChessChapter } from './chessChapter';
+import { ChessGame, GameDelta, Promotion } from './chessGame';
 
 export interface ChessStudy {
   selectChapter(index: number): ChessChapter | null;
+}
+
+export interface ChessChapter extends ChessGame {
+  showHints(): DrawShape[];
+  playUserMove(origin: string, destination: string, promotion?: Promotion): GameDelta;
+  playAiMove(): GameDelta;
+  isEndOfLine(): boolean;
+}
+
+export interface DrawShape {
+  orig: string;
+  dest?: string;
+  brush?: string;
+  modifiers?: { lineWidth?: number };
+  piece?: {
+    role: 'king' | 'queen' | 'rook' | 'bishop' | 'knight' | 'pawn';
+    color: 'white' | 'black';
+    scale?: number;
+  };
+  customSvg?: string;
 }
 
 export const createChessStudy = (pgn: string): ChessStudy => {
