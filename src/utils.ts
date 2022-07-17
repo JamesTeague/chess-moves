@@ -1,6 +1,5 @@
 import { type ChessInstance, SQUARES } from 'chess.js';
-import type { Dests } from 'chessground/types';
-import type { GameDelta } from './chessGame';
+import { Dests, GameDelta } from './types';
 
 export const possibleMovesToDests = (game: ChessInstance): Dests => {
   const dests: Dests = new Map();

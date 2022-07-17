@@ -1,31 +1,6 @@
-import type { Dests, Key } from 'chessground/types';
-import { Chess, type ChessInstance, type Move, type Square } from 'chess.js';
+import { Chess, type ChessInstance, type Square } from 'chess.js';
 import { createDelta, possibleMovesToDests, toColor } from './utils';
-
-export type GameDelta = {
-  fen: string;
-  turnColor: 'white' | 'black';
-  isCheck: boolean;
-  dests: Dests;
-  lastMove: Move;
-  isGameOver: boolean;
-  isStalemate: boolean;
-  isCheckmate: boolean;
-  isDraw: boolean;
-  isThreefoldRepetition: boolean;
-  isInsufficientMaterial: boolean;
-};
-
-export type Promotion = 'q' | 'b' | 'n' | 'r' | undefined;
-
-export interface ChessGame {
-  getDests(): Dests;
-  isPromotion(origin: Key, destination: Key): boolean;
-  playUserMove(origin: Key, destination: Key, promotion?: Promotion): GameDelta;
-  playAiMove(): GameDelta;
-  turnColor(): 'white' | 'black';
-  load(fen: string): GameDelta;
-}
+import { ChessGame, GameDelta, Key, Promotion } from './types';
 
 export const createChessGame = (fen?: string): ChessGame => {
   const chess = new Chess(fen);

@@ -1,7 +1,8 @@
 import { beforeAll, describe, it, expect } from 'vitest';
 import { Chess } from 'chess.js';
-import { createChessGame, type ChessGame, Promotion } from '../chessGame';
+import { createChessGame } from '../chessGame';
 import { possibleMovesToDests } from '../utils';
+import { ChessGame, Promotion } from '../types';
 
 describe('ChessGame', () => {
   let chessGame: ChessGame;
