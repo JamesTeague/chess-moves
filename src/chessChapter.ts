@@ -1,9 +1,8 @@
 import type { Key } from 'chessground/types';
 import { Chess, type ChessInstance, type Square } from 'chess.js';
 import type { PgnMove } from '@mliebelt/pgn-parser';
-import type { Promotion } from './chessGame';
+import type { ChessChapter, DrawShape, Promotion } from './types';
 import { createDelta, possibleMovesToDests, toColor } from './utils';
-import { ChessChapter, DrawShape } from './chessStudy';
 
 type Line = {
   move: string;
@@ -167,6 +166,6 @@ export const createChessChapter = (
     isPromotion: () => false,
     isEndOfLine: () => possibleMovesFn(currentMove).length === 0,
     load: load(chess),
-    reset: () => { currentMove.length = 0},
+    reset: () => { currentMove.length = 0 },
   };
 };
