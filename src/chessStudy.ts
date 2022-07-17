@@ -14,5 +14,6 @@ export const createChessStudy = (pgn: string): ChessStudy => {
 
   return {
     selectChapter: (index) => chapters?.get(index) ?? null,
+    getChapters: () => Array.from(chapters.values())
   };
 };

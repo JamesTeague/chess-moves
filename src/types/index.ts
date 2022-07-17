@@ -28,6 +28,7 @@ export interface ChessGame {
 
 export interface ChessStudy {
   selectChapter(index: number): ChessChapter | null;
+  getChapters(): ChessChapter[]
 }
 
 export interface ChessChapter extends ChessGame {
