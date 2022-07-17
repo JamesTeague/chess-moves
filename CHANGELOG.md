@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/JamesTeague/chess-moves/compare/v1.1.0...v1.1.1) (2022-07-17)
+
+
+### Bug Fixes
+
+* **types:** export types correctly and reliably ([42b352c](https://github.com/JamesTeague/chess-moves/commit/42b352c4a6bc14cacf6b9cab8025d4b1b58c1715))
+
 ## [1.1.0](https://github.com/JamesTeague/chess-moves/compare/v1.0.2...v1.1.0) (2022-07-17)
 
 
