@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/JamesTeague/chess-moves/compare/v1.0.2...v1.1.0) (2022-07-17)
+
+
+### Features
+
+* **chapter:** allow chapter to be reset for repetition ([bfa70f6](https://github.com/JamesTeague/chess-moves/commit/bfa70f6c2006733da67aacb52296d32acf2cd320))
+
 ## [1.0.2](https://github.com/JamesTeague/chess-moves/compare/v1.0.1...v1.0.2) (2022-06-27)
 
 
