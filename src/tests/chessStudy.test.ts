@@ -5,6 +5,20 @@ import { pgnTest, shortPgn } from './pgn';
 import { createChessStudy } from '../chessStudy';
 
 describe('ChessStudy', () => {
+  it('allows user to select a chapter', () => {
+    const chapter = createChessStudy(pgnTest).selectChapter(11);
+
+    expect(chapter).not.toBe(null);
+  });
+
+  it('returns null if chapter does not exist', () => {
+    const chapter = createChessStudy(pgnTest).selectChapter(12);
+
+    expect(chapter).toBe(null);
+  });
+});
+
+describe('ChessChapter', () => {
   it('gives all valid moves from a starting position', () => {
     const chess = new Chess();
     const dests = createChessStudy(pgnTest).selectChapter(11)!.getDests();
@@ -71,4 +85,15 @@ describe('ChessStudy', () => {
       turnColor: 'black',
     });
   });
-});
+
+  it('resets to allow repetition', () => {
+    const chapter = createChessStudy(shortPgn).selectChapter(0)!;
+    [...Array(10).keys()].forEach(() => chapter.playAiMove());
+
+    expect(chapter.isEndOfLine()).toBe(true);
+
+    chapter.reset();
+
+    expect(chapter.isEndOfLine()).toBe(false);
+  });
+})

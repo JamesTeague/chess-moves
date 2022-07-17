@@ -12,6 +12,7 @@ export interface ChessChapter extends ChessGame {
   playUserMove(origin: string, destination: string, promotion?: Promotion): GameDelta;
   playAiMove(): GameDelta;
   isEndOfLine(): boolean;
+  reset(): void;
 }
 
 export interface DrawShape {

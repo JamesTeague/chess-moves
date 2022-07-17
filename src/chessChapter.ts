@@ -167,5 +167,6 @@ export const createChessChapter = (
     isPromotion: () => false,
     isEndOfLine: () => possibleMovesFn(currentMove).length === 0,
     load: load(chess),
+    reset: () => { currentMove.length = 0},
   };
 };
