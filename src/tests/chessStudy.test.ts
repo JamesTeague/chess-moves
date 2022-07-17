@@ -16,6 +16,12 @@ describe('ChessStudy', () => {
 
     expect(chapter).toBe(null);
   });
+
+  it('returns all chapters', () => {
+    const study = createChessStudy(pgnTest);
+
+    expect(study.getChapters()).toHaveLength(11);
+  })
 });
 
 describe('ChessChapter', () => {
