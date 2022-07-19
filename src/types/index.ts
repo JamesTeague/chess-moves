@@ -32,6 +32,8 @@ export interface ChessStudy {
 }
 
 export interface ChessChapter extends ChessGame {
+  title: string;
+  site: string;
   showHints(): DrawShape[];
   playUserMove(origin: string, destination: string, promotion?: Promotion): GameDelta;
   playAiMove(): GameDelta;
