@@ -8,11 +8,12 @@ export const createChessStudy = (pgn: string): ChessStudy => {
   const chapters = new Map<number, ChessChapter>();
   const parsedPgn = <ParseTree[]>parse(pgn, { startRule: 'games' });
 
-  parsedPgn.forEach(({ moves }, index) => {
-    chapters.set(index, createChessChapter(chess, moves));
+  parsedPgn.forEach(({ tags, moves }, index) => {
+    chapters.set(index, createChessChapter(chess, moves, tags));
   });
 
   return {
     selectChapter: (index) => chapters?.get(index) ?? null,
+    getChapters: () => Array.from(chapters.values())
   };
 };

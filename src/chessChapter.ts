@@ -1,6 +1,6 @@
 import type { Key } from 'chessground/types';
 import { Chess, type ChessInstance, type Square } from 'chess.js';
-import type { PgnMove } from '@mliebelt/pgn-parser';
+import type { PgnMove, Tags } from '@mliebelt/pgn-parser';
 import type { ChessChapter, DrawShape, Promotion } from './types';
 import { createDelta, possibleMovesToDests, toColor } from './utils';
 
@@ -152,12 +152,15 @@ const load = (chess: ChessInstance) => (fen: string) => {
 export const createChessChapter = (
   chess: ChessInstance,
   moves: PgnMove[],
+  tags?: Tags,
 ): ChessChapter => {
   const currentMove: number[] = [];
   const lines = generateNodes(moves);
   const possibleMovesFn = getPossibleMoves(lines);
 
   return {
+    title: tags?.Event ?? '',
+    site: tags?.Site ?? '',
     showHints: showHints(chess, currentMove, possibleMovesFn),
     playUserMove: playUserMove(chess, currentMove, possibleMovesFn),
     playAiMove: playAiMove(chess, currentMove, possibleMovesFn),
