@@ -149,6 +149,11 @@ const load = (chess: ChessInstance) => (fen: string) => {
   return createDelta(chess);
 };
 
+const reset = (chess: ChessInstance, currentMove: number[]) => () => {
+  chess.reset();
+  currentMove.length = 0;
+}
+
 export const createChessChapter = (
   chess: ChessInstance,
   moves: PgnMove[],
@@ -169,6 +174,6 @@ export const createChessChapter = (
     isPromotion: () => false,
     isEndOfLine: () => possibleMovesFn(currentMove).length === 0,
     load: load(chess),
-    reset: () => { currentMove.length = 0 },
+    reset: reset(chess, currentMove),
   };
 };

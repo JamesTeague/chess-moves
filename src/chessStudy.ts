@@ -4,12 +4,11 @@ import { createChessChapter } from './chessChapter';
 import { ChessChapter, ChessStudy } from './types';
 
 export const createChessStudy = (pgn: string): ChessStudy => {
-  const chess = new Chess();
   const chapters = new Map<number, ChessChapter>();
   const parsedPgn = <ParseTree[]>parse(pgn, { startRule: 'games' });
 
-  parsedPgn.forEach(({ tags, moves }, index) => {
-    chapters.set(index, createChessChapter(chess, moves, tags));
+  parsedPgn.forEach(({ moves }, index) => {
+    chapters.set(index, createChessChapter(new Chess(), moves));
   });
 
   return {
