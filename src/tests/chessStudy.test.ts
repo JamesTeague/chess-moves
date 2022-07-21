@@ -20,7 +20,7 @@ describe('ChessStudy', () => {
   it('returns all chapters', () => {
     const study = createChessStudy(pgnTest);
 
-    expect(study.getChapters()).toHaveLength(11);
+    expect(study.getChapters()).toHaveLength(12);
   })
 });
 
