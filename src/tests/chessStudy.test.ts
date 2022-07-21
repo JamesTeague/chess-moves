@@ -17,7 +17,6 @@ describe('ChessStudy', () => {
     expect(chapter).toBe(null);
   });
 
-
   it('allows chapter to be changed', () => {
     const study = createChessStudy(pgnTest);
     let chapter = study.selectChapter(0)!;
@@ -28,6 +27,12 @@ describe('ChessStudy', () => {
 
     expect(delta0.fen).not.toEqual(delta1.fen);
     expect(delta0.lastMove).not.toEqual(delta1.lastMove);
+  });
+
+  it('returns all chapters', () => {
+    const study = createChessStudy(pgnTest);
+
+    expect(study.getChapters()).toHaveLength(12);
   });
 });
 

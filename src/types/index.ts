@@ -28,9 +28,12 @@ export interface ChessGame {
 
 export interface ChessStudy {
   selectChapter(index: number): ChessChapter | null;
+  getChapters(): ChessChapter[]
 }
 
 export interface ChessChapter extends ChessGame {
+  title: string;
+  site: string;
   showHints(): DrawShape[];
   playUserMove(origin: string, destination: string, promotion?: Promotion): GameDelta;
   playAiMove(): GameDelta;
