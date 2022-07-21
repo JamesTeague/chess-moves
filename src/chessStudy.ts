@@ -7,8 +7,8 @@ export const createChessStudy = (pgn: string): ChessStudy => {
   const chapters = new Map<number, ChessChapter>();
   const parsedPgn = <ParseTree[]>parse(pgn, { startRule: 'games' });
 
-  parsedPgn.forEach(({ moves }, index) => {
-    chapters.set(index, createChessChapter(new Chess(), moves));
+  parsedPgn.forEach(({ tags,moves }, index) => {
+    chapters.set(index, createChessChapter(new Chess(), moves, tags));
   });
 
   return {
