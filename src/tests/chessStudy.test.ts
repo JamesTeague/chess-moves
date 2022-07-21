@@ -34,6 +34,15 @@ describe('ChessStudy', () => {
 
     expect(study.getChapters()).toHaveLength(12);
   });
+
+  it('gives all chapters a title and site', () => {
+    const study = createChessStudy(pgnTest);
+
+    study.getChapters().forEach((chapter) => {
+      expect(chapter.title).not.toBe('');
+      expect(chapter.site).not.toBe('');
+    });
+  })
 });
 
 describe('ChessChapter', () => {
