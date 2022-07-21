@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/JamesTeague/chess-moves/compare/v1.2.0...v1.2.1) (2022-07-21)
+
+
+### Bug Fixes
+
+* **study:** pass in tags to creation method ([f958b1c](https://github.com/JamesTeague/chess-moves/commit/f958b1cdd8859278515426a37b5ed1dd57b1ab42))
+
 ## [1.2.0](https://github.com/JamesTeague/chess-moves/compare/v1.1.1...v1.2.0) (2022-07-21)
 
 
