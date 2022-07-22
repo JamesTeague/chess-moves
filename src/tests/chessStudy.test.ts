@@ -81,14 +81,26 @@ describe('ChessChapter', () => {
     expect(delta.fen).toEqual(localChess.fen());
   });
 
-  it('shows hints', () => {
+  it('shows all hints', () => {
     const chapter = createChessStudy(pgnTest).selectChapter(0)!;
 
-    const hints = chapter.showHints();
+    chapter.playAiMove();
+    chapter.playUserMove('g7', 'g6');
+    chapter.playAiMove();
+    chapter.playUserMove('f8', 'g7');
+    chapter.playAiMove();
+
+    const hints = chapter.showHints()
+
     const expectedHints = [
       {
-        orig: 'e2',
-        dest: 'e4',
+        orig: 'd7',
+        dest: 'd6',
+        brush: 'blue',
+      },
+      {
+        orig: 'a7',
+        dest: 'a6',
         brush: 'blue',
       },
     ];
