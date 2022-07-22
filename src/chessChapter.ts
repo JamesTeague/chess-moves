@@ -76,6 +76,7 @@ const showHints =
           dest: maybeMove.to,
           brush: 'blue',
         });
+        chessCopy.undo();
       }
     });
 
