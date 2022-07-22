@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/JamesTeague/chess-moves/compare/v1.2.1...v1.2.2) (2022-07-22)
+
+
+### Bug Fixes
+
+* **hints:** show all hints that are available ([7c7969d](https://github.com/JamesTeague/chess-moves/commit/7c7969d0042f6eb627b36a9985fdfbeb3938ae93))
+
 ## [1.2.1](https://github.com/JamesTeague/chess-moves/compare/v1.2.0...v1.2.1) (2022-07-21)
 
 
