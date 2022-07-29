@@ -13,6 +13,7 @@ export interface GameDelta {
   isDraw: boolean;
   isThreefoldRepetition: boolean;
   isInsufficientMaterial: boolean;
+  comment?: string;
 }
 
 export type Promotion = 'q' | 'b' | 'n' | 'r' | undefined;

@@ -10,13 +10,18 @@ type Line = {
   comment?: string;
 };
 
+type StudyMove = {
+  move: string;
+  comment?: string;
+}
+
 const createNode = (move: PgnMove): Line => {
   const cleanMove = move.notation.notation.replace(/[^a-zA-Z\d-+=#]/g, '');
 
   return {
     move: cleanMove,
     children: [],
-    comment: move.commentAfter,
+    comment: move.commentAfter?.trim(),
   };
 };
 
@@ -59,7 +64,7 @@ const showHints =
   (
     chess: ChessInstance,
     currentMove: number[],
-    possibleMovesFn: (currentMove: number[]) => string[],
+    possibleMovesFn: (currentMove: number[]) => StudyMove[],
   ) =>
   () => {
     const drawShapes: DrawShape[] = [];
@@ -67,7 +72,7 @@ const showHints =
 
     const chessCopy = new Chess(chess.fen());
 
-    moves.forEach((move) => {
+    moves.forEach(({ move }) => {
       const maybeMove = chessCopy.move(move);
 
       if (maybeMove) {
@@ -85,7 +90,7 @@ const showHints =
 
 const getPossibleMoves = (lines: Line[]) => (currentMove: number[]) => {
   if (currentMove.length === 0) {
-    return lines.map(({ move }) => move);
+    return lines.map(({ move, comment }) => ({ move, comment }));
   }
 
   let line = lines[currentMove[0]].children;
@@ -96,31 +101,33 @@ const getPossibleMoves = (lines: Line[]) => (currentMove: number[]) => {
     }
   });
 
-  return line.map(({ move }) => move);
+  return line.map(({ move, comment }) => ({
+    move, comment,
+  }));
 };
 
 const playAiMove =
   (
     chess: ChessInstance,
     currentMove: number[],
-    possibleMovesFn: (currentMove: number[]) => string[],
+    possibleMovesFn: (currentMove: number[]) => StudyMove[],
   ) =>
   () => {
     const randomIndex = ~~(Math.random() * possibleMovesFn(currentMove).length);
-    const move = possibleMovesFn(currentMove)[randomIndex];
+    const { move, comment } = possibleMovesFn(currentMove)[randomIndex];
 
     currentMove.push(randomIndex);
 
     chess.move(move);
 
-    return createDelta(chess);
+    return createDelta(chess, comment);
   };
 
 const playUserMove =
   (
     chess: ChessInstance,
     currentMove: number[],
-    possibleMovesFn: (currentMove: number[]) => string[],
+    possibleMovesFn: (currentMove: number[]) => StudyMove[],
   ) =>
   (origin: Key, destination: Key, promotion?: Promotion) => {
     const move = chess.move({
@@ -129,16 +136,20 @@ const playUserMove =
       promotion,
     });
 
-    if (move && possibleMovesFn(currentMove).includes(move.san)) {
-      const indexOfMove = possibleMovesFn(currentMove).findIndex(
-        (possibleMove) => possibleMove === move.san,
+    let comment;
+
+    if (move && possibleMovesFn(currentMove).map(currentMove => currentMove.move).includes(move.san)) {
+      const possibleMoves = possibleMovesFn(currentMove);
+      const indexOfMove = possibleMoves.findIndex(
+        (possibleMove) => possibleMove.move === move.san,
       );
+      comment = possibleMoves[indexOfMove].comment
       currentMove.push(indexOfMove);
     } else {
       chess.undo();
     }
 
-    return createDelta(chess);
+    return createDelta(chess, comment);
   };
 
 const turnColor = (chess: ChessInstance) => () => toColor(chess);

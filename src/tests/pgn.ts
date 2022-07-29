@@ -1016,4 +1016,4 @@ export const shortPgn = '[Event "Caro Kann: Exchange Variation Trap1 - Black Win
   '[Opening "Caro-Kann Defense: Exchange Variation"]\n' +
   '[Annotator "https://lichess.org/@/utkal_s"]\n' +
   '\n' +
-  '1. e4 c6 2. d4 d5 3. exd5 cxd5 4. h3 Nc6 5. Bd3 { [%cal Gf1d3] } 5... Nxd4 *'
+  '1. e4 { Can only play against 1. e4 } c6 2. d4 d5 3. exd5 cxd5 4. h3 Nc6 5. Bd3 { [%cal Gf1d3] } 5... Nxd4 *'

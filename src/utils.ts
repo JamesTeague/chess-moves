@@ -20,7 +20,7 @@ export const possibleMovesToDests = (game: ChessInstance): Dests => {
 export const toColor = (game: ChessInstance) =>
   game.turn() === 'w' ? 'white' : 'black';
 
-export const createDelta = (chess: ChessInstance): GameDelta => {
+export const createDelta = (chess: ChessInstance, comment?: string): GameDelta => {
   const history = chess.history({ verbose: true });
 
   return {
@@ -35,5 +35,6 @@ export const createDelta = (chess: ChessInstance): GameDelta => {
     isGameOver: chess.game_over(),
     isStalemate: chess.in_stalemate(),
     isThreefoldRepetition: chess.in_threefold_repetition(),
+    comment,
   };
 };

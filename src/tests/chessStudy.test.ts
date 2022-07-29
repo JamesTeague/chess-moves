@@ -135,4 +135,11 @@ describe('ChessChapter', () => {
 
     expect(chapter.isEndOfLine()).toBe(false);
   });
+
+  it('shows comments after moves', () => {
+    const chapter = createChessStudy(shortPgn).selectChapter(0)!;
+    const delta = chapter.playAiMove();
+
+    expect(delta.comment).toBe('Can only play against 1. e4')
+  });
 })
