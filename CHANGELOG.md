@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/JamesTeague/chess-moves/compare/v1.2.2...v1.3.0) (2022-07-29)
+
+
+### Features
+
+* **study:** add comment to delta when available ([79c85b6](https://github.com/JamesTeague/chess-moves/commit/79c85b653f4ed37ffedb51d292d65ad778f6fa8a)), closes [#24](https://github.com/JamesTeague/chess-moves/issues/24)
+
 ## [1.2.2](https://github.com/JamesTeague/chess-moves/compare/v1.2.1...v1.2.2) (2022-07-22)
 
 
