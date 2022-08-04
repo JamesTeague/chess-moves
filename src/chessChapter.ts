@@ -166,6 +166,42 @@ const reset = (chess: ChessInstance, currentMove: number[]) => () => {
   currentMove.length = 0;
 }
 
+const getWhiteTitle = (tags: Tags) => {
+  if (tags.WhiteTitle) {
+    return tags.WhiteTitle;
+  } else if (tags.White) {
+    return tags.White;
+  }
+
+  return '';
+}
+const getBlackTitle = (tags: Tags) => {
+  if (tags.BlackTitle) {
+    return tags.BlackTitle;
+  } else if (tags.Black) {
+    return tags.Black;
+  }
+
+  return '';
+}
+
+const findTitle = (tags?: Tags) => {
+  if (!tags) {
+    return 'No Title Found';
+  }
+
+  const whiteTitle = getWhiteTitle(tags).trim();
+  const blackTitle = getBlackTitle(tags).trim();
+
+  let title = whiteTitle;
+
+  if (blackTitle) {
+    title = title.concat(' - ', blackTitle).trim();
+  }
+
+  return title;
+}
+
 export const createChessChapter = (
   chess: ChessInstance,
   moves: PgnMove[],
@@ -176,7 +212,7 @@ export const createChessChapter = (
   const possibleMovesFn = getPossibleMoves(lines);
 
   return {
-    title: tags?.Event ?? '',
+    title: findTitle(tags),
     site: tags?.Site ?? '',
     showHints: showHints(chess, currentMove, possibleMovesFn),
     playUserMove: playUserMove(chess, currentMove, possibleMovesFn),

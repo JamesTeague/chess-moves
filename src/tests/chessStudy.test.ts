@@ -1,24 +1,24 @@
 import { describe, it, expect } from 'vitest';
 import { Chess, Square } from 'chess.js';
 import { possibleMovesToDests } from '../utils';
-import { pgnTest, shortPgn } from './pgn';
+import { caroPgn, londonPgn, modernPgn, shortPgn } from './pgn';
 import { createChessStudy } from '../chessStudy';
 
 describe('ChessStudy', () => {
   it('allows user to select a chapter', () => {
-    const chapter = createChessStudy(pgnTest).selectChapter(11);
+    const chapter = createChessStudy(modernPgn).selectChapter(11);
 
     expect(chapter).not.toBe(null);
   });
 
   it('returns null if chapter does not exist', () => {
-    const chapter = createChessStudy(pgnTest).selectChapter(12);
+    const chapter = createChessStudy(modernPgn).selectChapter(12);
 
     expect(chapter).toBe(null);
   });
 
   it('allows chapter to be changed', () => {
-    const study = createChessStudy(pgnTest);
+    const study = createChessStudy(modernPgn);
     let chapter = study.selectChapter(0)!;
 
     const delta0 = chapter.playAiMove();
@@ -30,13 +30,13 @@ describe('ChessStudy', () => {
   });
 
   it('returns all chapters', () => {
-    const study = createChessStudy(pgnTest);
+    const study = createChessStudy(modernPgn);
 
     expect(study.getChapters()).toHaveLength(12);
   });
 
   it('gives all chapters a title and site', () => {
-    const study = createChessStudy(pgnTest);
+    const study = createChessStudy(modernPgn);
 
     study.getChapters().forEach((chapter) => {
       expect(chapter.title).not.toBe('');
@@ -48,13 +48,13 @@ describe('ChessStudy', () => {
 describe('ChessChapter', () => {
   it('gives all valid moves from a starting position', () => {
     const chess = new Chess();
-    const dests = createChessStudy(pgnTest).selectChapter(11)!.getDests();
+    const dests = createChessStudy(modernPgn).selectChapter(11)!.getDests();
 
     expect(dests).toEqual(possibleMovesToDests(chess));
   });
 
   it('only allows moves from the pgn', () => {
-    const chapter = createChessStudy(pgnTest).selectChapter(11)!;
+    const chapter = createChessStudy(modernPgn).selectChapter(11)!;
     const localChess = new Chess();
 
     const firstMoveDelta = chapter.playAiMove();
@@ -82,7 +82,7 @@ describe('ChessChapter', () => {
   });
 
   it('shows all hints', () => {
-    const chapter = createChessStudy(pgnTest).selectChapter(0)!;
+    const chapter = createChessStudy(modernPgn).selectChapter(0)!;
 
     chapter.playAiMove();
     chapter.playUserMove('g7', 'g6');
@@ -116,8 +116,8 @@ describe('ChessChapter', () => {
   });
 
   it('loads a fen', () => {
-    const chessStudy = createChessStudy(shortPgn).selectChapter(0);
-    const delta = chessStudy!.load('8/7P/4k3/8/8/3K4/p7/8 b - - 0 1');
+    const chapter = createChessStudy(shortPgn).selectChapter(0)!;
+    const delta = chapter.load('8/7P/4k3/8/8/3K4/p7/8 b - - 0 1');
 
     expect(delta).toMatchObject({
       fen: '8/7P/4k3/8/8/3K4/p7/8 b - - 0 1',
@@ -141,5 +141,26 @@ describe('ChessChapter', () => {
     const delta = chapter.playAiMove();
 
     expect(delta.comment).toBe('Can only play against 1. e4')
+  });
+
+  it.each([
+    {
+      pgn: modernPgn,
+      firstChapterTitle: 'Modern Defense - Anti-Fianchetto (150 Attack)',
+      index: 0
+    },
+    {
+      pgn: londonPgn,
+      firstChapterTitle: 'Chapter 1 - London: Black Plays Be7',
+      index: 1,
+    },
+    {
+      pgn: caroPgn,
+      firstChapterTitle: 'Caro-Kann - Repertoire Overview',
+      index: 0,
+    }])('finds the correct title for given chapter', ({ pgn, firstChapterTitle, index})=>{
+    const chapter = createChessStudy(pgn).selectChapter(index)!;
+
+    expect(chapter.title).toEqual(firstChapterTitle);
   });
 })
