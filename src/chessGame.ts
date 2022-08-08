@@ -43,7 +43,8 @@ const playUserMove =
 const playAiMove = (chess: ChessInstance) => () => {
   const moves = chess.moves({ verbose: true });
 
-  const move = moves[Math.round(Math.random()) * moves.length];
+  const randomIndex = Math.round(Math.random() * moves.length);
+  const move = moves[randomIndex];
 
   chess.move(move);
 
