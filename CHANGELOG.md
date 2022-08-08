@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/JamesTeague/chess-moves/compare/v1.3.0...v1.3.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* **game:** random moves are now random ([258acbc](https://github.com/JamesTeague/chess-moves/commit/258acbc79a6a152f27841cde31999c1d2f6bf56e)), closes [#7](https://github.com/JamesTeague/chess-moves/issues/7)
+* **game:** round index correctly ([c0dc477](https://github.com/JamesTeague/chess-moves/commit/c0dc477690fef49dd79e8291fef8db86dbd88df3))
+
 ## [1.3.0](https://github.com/JamesTeague/chess-moves/compare/v1.2.2...v1.3.0) (2022-07-29)
 
 
