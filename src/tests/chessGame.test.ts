@@ -65,12 +65,10 @@ describe('ChessGame', () => {
     const delta = chessGame.playAiMove();
     chess.move(delta.lastMove);
 
-    expect(delta).toMatchObject({
-      fen: chess.fen(),
-      turnColor: 'black',
-      isCheck: false,
-      dests: possibleMovesToDests(chess),
-    });
+    expect(delta.fen).toEqual(chess.fen());
+    expect(delta.turnColor).toEqual('black');
+    expect(delta.isCheck).toEqual(false);
+    expect(delta.dests).toMatchObject( possibleMovesToDests(chess));
   });
 
   it('does not play invalid move', () => {
